@@ -1,3 +1,10 @@
+## Now
+- [ ] S0 Add vehicles to schema
+- [ ] S1 Trips & Legs
+- [ ] S2 Load buffers
+
+---
+
 ## Cool stuff to add in future
 - [ ] Loading buffers - its not loaded instantly
 - [ ] Highlight when equipment is scheduled back-to-back
