@@ -1,3 +1,8 @@
+What I need to do is store see what I have to store about warehouse
+store what I can see in database so FSM can operate on DB which
+is representation of database. Include atomic operations in FSM
+and prepare DB for it.
+
 ## Now
 - [x] S0 Add vehicles to schema
 - [x] S1 Load buffers

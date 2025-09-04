@@ -42,3 +42,9 @@ be self managing via this scheduler.
 out what I need for that equation and wrap my data against it - I will start
 with what I want, not what I need. This sound pretty cool, I need to do more
 research on this.
+
+- If I were to use FSM (state of warehouse and next state - entering order)
+it could actually become scalable by renting integrators doing the job
+of drawing FSMs xDD.
+
+- It could be cheap - I need to measure.
