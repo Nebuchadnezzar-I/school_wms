@@ -2,6 +2,8 @@
 - [x] S0 Add vehicles to schema
 - [x] S1 Load buffers
 - [x] S2 Trips & Legs
+- [ ] Equipment could be in vehicle and it needs to be adjusted in buffer
+to make sure its avaliable in warehouse or add extra buffer
 
 - [ ] Read: https://backend.orbit.dtu.dk/ws/portalfiles/portal/5280227/MinWen_PhD_thesis.pdf
 
