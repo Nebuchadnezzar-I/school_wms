@@ -1,12 +1,14 @@
 ## Now
-- [ ] S0 Add vehicles to schema
-- [ ] S1 Trips & Legs
-- [ ] S2 Load buffers
+- [x] S0 Add vehicles to schema
+- [x] S1 Load buffers
+- [x] S2 Trips & Legs
+
+- [ ] Read: https://backend.orbit.dtu.dk/ws/portalfiles/portal/5280227/MinWen_PhD_thesis.pdf
 
 ---
 
 ## Cool stuff to add in future
-- [ ] Loading buffers - its not loaded instantly
+- [x] Loading buffers - its not loaded instantly
 - [ ] Highlight when equipment is scheduled back-to-back
 - [ ] Show maintance notices - last inspection
 

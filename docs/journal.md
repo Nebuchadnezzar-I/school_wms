@@ -30,3 +30,15 @@ each type_id - for non trivial lifetimes
 - Finished HTMX book and now I read POSIX perf book
 - Iam reading NGNIX book bcs it allows me to support HTTP 1.1 while shipping
 HTTP3
+
+- So I found out that I need disposables, vehicles and rental items
+- I ditched main flow but kept item -> type -> booking
+
+- So after consulting with ChatGPT 5.0 Thinking I got thinking about designing
+db in a way that would remove need for warehouse manegement and would
+be self managing via this scheduler.
+
+- AI proposed starting with scheduler core, which is equation. I need to find
+out what I need for that equation and wrap my data against it - I will start
+with what I want, not what I need. This sound pretty cool, I need to do more
+research on this.
