@@ -48,3 +48,17 @@ it could actually become scalable by renting integrators doing the job
 of drawing FSMs xDD.
 
 - It could be cheap - I need to measure.
+
+## Sep 5 2025
+
+- Scheduler should: select, dispatch, advance time, get cost of this. 
+- Then after finding best one, while waiting physically, try to bind other
+select event in advace while this one is still going on.
+
+- Its fucking not trivial, even getting enough data for it is hard. And
+putting it all into chart is fucking hard.
+
+- If I were to make UI good enough I will get rid of scheduler and leave
+human operator do it. It would show all warnings, issues even last minute
+and it would handle all possible edge cases with good saving policy.
+Then it would just normalize to a stream all events and show to loading crew.
