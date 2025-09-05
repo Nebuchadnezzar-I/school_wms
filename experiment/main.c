@@ -1,81 +1,43 @@
-#include <stdio.h>
-#include <stdint.h>
+#include "main.h"
 
 
-// Types
-
-
-#define MAX_EQUIP 20
-
-typedef uint32_t Id;
-typedef uint64_t Epoch;
-typedef uint32_t Cargo;
-
-typedef enum { LOAD, UNLOAD } Action;
-typedef enum { LIGHT, STAND, ACCESSORY, DISPOSABLE, GEAR } Kind;
-typedef enum { BROKEN, AVAILABLE, RENTED } Cond;
-
-
-// Data
+#define F1  (1ULL << 0)
+#define F2  (1ULL << 1)
+#define F3  (1ULL << 2)
+#define F4  (1ULL << 3)
 
 
 typedef struct {
-    float lat;
-    float lon;
-} Loca;
-
-typedef struct {
-    char    name[MAX_EQUIP];
-    Kind    kind;
-    Cond    state;
-} Equp;
-
-typedef struct {
-    Cargo   cargo;
-    Action  mission;
-    Loca    *depart;
-    Epoch   depart_at;
-    Loca    *arrival;
-    Epoch   arrival_at;
-} Trip;
-
-typedef struct {
-    Id      id;
-    Trip    *current_trip;
-    Trip    *next_trip;
-} Vhcl;
+    U64     equip;
+    U64     vehic;
+} WH;
 
 
-// Logic
+void run(WH *curr, WH *next) {
+    if (curr->equip & F1 && next->equip & F1) {
+        printf("Hit\n");
+    }
 
+    if (curr->equip & F2) {
+    }
 
-Vhcl v_0 =  { 0, NULL, NULL };
-Vhcl v_1 =  { 1, NULL, NULL };
-Vhcl v_2 =  { 2, NULL, NULL };
+    if (curr->equip & F3) {
+    }
 
-
-void schedule(Trip *trips[], size_t count) {
-
+    if (curr->equip & F4) {
+    }
 }
 
-
 int main() {
-    Loca l_0 =  { 0,    0                               };
-    Loca l_1 =  { 10,   10                              };
-    Loca l_2 =  { 20,   20                              };
+    U64 w1_f = 0; w1_f |= F1 | F2;
+    U64 w2_f = 0; w2_f |= F3 | F4;
+    WH current_state = { w1_f, w2_f };
 
-    Equp e_0 =  { "Light zero",     LIGHT, AVAILABLE    };
-    Equp e_1 =  { "Light one",      LIGHT, AVAILABLE    };
-    Equp e_2 =  { "Light two",      LIGHT, AVAILABLE    };
-    Equp e_3 =  { "Light three",    LIGHT, AVAILABLE    };
+    U64 w3_f = 0; w3_f |= F1 | F4;
+    U64 w4_f = 0; w4_f |= F1 | F2;
+    WH next_state = { w3_f, w4_f };
 
-    Trip t_0 =  { 0x0,  LOAD,   &l_0, 0,    &l_1, 10    };
-    Trip t_1 =  { 0x1,  UNLOAD, &l_1, 100,  &l_0, 110   };
-    Trip t_2 =  { 0x2,  LOAD,   &l_1, 200,  &l_0, 210   };
-
-    Trip *trips[] = { &t_0, &t_1, &t_2 };
-    size_t n = sizeof(trips) / sizeof(trips[0]);
-    schedule(trips, n);
+    run(&current_state, &next_state);
 
     return 0;
 }
