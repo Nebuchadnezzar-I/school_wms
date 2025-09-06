@@ -62,3 +62,10 @@ putting it all into chart is fucking hard.
 human operator do it. It would show all warnings, issues even last minute
 and it would handle all possible edge cases with good saving policy.
 Then it would just normalize to a stream all events and show to loading crew.
+
+## Sep 5 2025
+
+- As was said, UI makes huge difference, today I experimented a lot! Its
+impossible to do job of CEO by machine, its super hard. Now Iam thinking
+about breaking warehouse to atoms (each piece of equipment) and just zoom out
+to eq_type and so on to see all underlying stuff there.
