@@ -69,3 +69,11 @@ Then it would just normalize to a stream all events and show to loading crew.
 impossible to do job of CEO by machine, its super hard. Now Iam thinking
 about breaking warehouse to atoms (each piece of equipment) and just zoom out
 to eq_type and so on to see all underlying stuff there.
+
+- Ok, so I finished what I watned structure is 100% clear and is viable for
+later use. Its 4 layer system (L0 - L4) which on zoom shows more info.
+Clear separation of concern and good CEO - L4 reporting will make sure it
+will work flawlessly. Looks promising. I will keep this structure, maybe
+later add debug tools, but I think its time to finish last pieces of "Final"
+diagram and get to work on DB and UI. Development of UI and DB should be
+disconnected.
