@@ -63,7 +63,7 @@ human operator do it. It would show all warnings, issues even last minute
 and it would handle all possible edge cases with good saving policy.
 Then it would just normalize to a stream all events and show to loading crew.
 
-## Sep 5 2025
+## Sep 6 2025
 
 - As was said, UI makes huge difference, today I experimented a lot! Its
 impossible to do job of CEO by machine, its super hard. Now Iam thinking
@@ -77,3 +77,13 @@ will work flawlessly. Looks promising. I will keep this structure, maybe
 later add debug tools, but I think its time to finish last pieces of "Final"
 diagram and get to work on DB and UI. Development of UI and DB should be
 disconnected.
+
+## Sep 7 2025
+
+- I finally got github student pack approved xD
+- Finished UI - Layered views of all layers (L0 - L4)
+- Visuals splitted based on roles but u can toggle more then one
+- Order trips and legs are straight forward
+- I just need to sort out L0 history, we dont know what is going
+to be loaded at that specific time, so this needs some thinking. Maybe 
+scheduler could propose solution.
