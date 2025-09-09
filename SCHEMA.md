@@ -2,7 +2,8 @@
 
 begin transaction;
 
-create type user_role as enum('admin', 'developer', 'operator', 'guest')
+create type user_role as enum('admin', 'developer', 'operator', 'guest');
+create type notification_type as enum('alert', 'warning', 'error', 'success');
 
 create table rental_types (
     id          bigserial constraint rental_types_pk primary key,
@@ -126,6 +127,29 @@ create table user_sessions (
     rotated_at     timestamptz,
     compromised_at timestamptz,
     last_used      timestamptz
+);
+
+create table notifications (
+    id          bigserial constraint notification_pk primary key,
+    importance  notification_type not null,
+    name        varchar(100)      not null,
+    description text
+);
+
+create table user_notification (
+    id              bigserial   not null constraint user_notification_pk primary key,
+    user_id         bigint      not null constraint user_notification_user_id_fk references users,
+    notification_id bigint      not null constraint user_notification_notification_id_fk references notifications,
+    read_at         timestamptz not null
+);
+
+create table change_log (
+    id             bigserial                 not null constraint change_log_pk primary key,
+    affected_table varchar(50)               not null,
+    affected_id    bigint                    not null,
+    query          text                      not null,
+    caused_by      bigint constraint change_log_user_id_fk references users,
+    caused_at      timestamptz default now() not null
 );
 
 commit transaction;

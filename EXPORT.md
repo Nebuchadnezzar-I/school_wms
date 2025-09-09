@@ -1,4 +1,16 @@
 ```sql
+create sequence notification_id_seq;
+
+alter sequence notification_id_seq owner to michalukropec;
+
+create type user_role as enum ('admin', 'developer', 'operator', 'guest');
+
+alter type user_role owner to michalukropec;
+
+create type notification_type as enum ('alert', 'warning', 'error', 'success');
+
+alter type notification_type owner to michalukropec;
+
 create table rental_types
 (
     id          bigserial
@@ -89,42 +101,6 @@ create table disposables
 alter table disposables
     owner to michalukropec;
 
-create table orders
-(
-    id          bigserial
-        constraint orders_pk
-            primary key,
-    priority    smallint default 0 not null,
-    name        varchar(100)       not null,
-    description text,
-    starting_at timestamp with time zone,
-    ending_at   timestamp with time zone
-);
-
-alter table orders
-    owner to michalukropec;
-
-create table order_items
-(
-    id                  bigserial
-        constraint order_items_pk
-            primary key,
-    order_id            bigint                   not null
-        constraint order_items_orders_id_fk
-            references orders,
-    rental_type_id      bigint,
-    rental_quantity     integer,
-    vehicle_type_id     bigint,
-    vehicle_quantity    integer,
-    disposable_type_id  integer,
-    disposable_quantity integer,
-    starting_at         timestamp with time zone not null,
-    ending_at           timestamp with time zone not null
-);
-
-alter table order_items
-    owner to michalukropec;
-
 create table clients
 (
     id          bigserial
@@ -136,54 +112,6 @@ create table clients
 );
 
 alter table clients
-    owner to michalukropec;
-
-create table order_clients
-(
-    id         bigserial
-        constraint order_clients_pk
-            primary key,
-    order_id   bigint                                 not null
-        constraint order_clients_order_id_fk
-            references orders,
-    client_id  bigint                                 not null
-        constraint order_clients_client_id_fk
-            references clients,
-    created_at timestamp with time zone default now() not null
-);
-
-alter table order_clients
-    owner to michalukropec;
-
-create table loads
-(
-    id            bigserial
-        constraint loads_pk
-            primary key,
-    rental_id     bigint,
-    vehicle_id    bigint,
-    disposable_id bigint,
-    loaded_at     timestamp with time zone default now() not null
-);
-
-alter table loads
-    owner to michalukropec;
-
-create table unloads
-(
-    id                   bigserial
-        constraint unloads_pk
-            primary key,
-    rental_id            bigint,
-    rental_state         text,
-    vehicle_id           bigint,
-    vehicle_state        text,
-    disposable_id        bigint,
-    disposable_remaining numeric(5, 2)            default 0.00  not null,
-    unloaded_at          timestamp with time zone default now() not null
-);
-
-alter table unloads
     owner to michalukropec;
 
 create table users
@@ -223,5 +151,150 @@ create table user_sessions
 );
 
 alter table user_sessions
+    owner to michalukropec;
+
+create table orders
+(
+    id           bigserial
+        constraint orders_pk
+            primary key,
+    priority     smallint default 0 not null,
+    name         varchar(100)       not null,
+    description  text,
+    starting_at  timestamp with time zone,
+    ending_at    timestamp with time zone,
+    user_session bigint             not null
+        constraint orders_session_id_fk
+            references user_sessions
+);
+
+alter table orders
+    owner to michalukropec;
+
+create table order_items
+(
+    id                  bigserial
+        constraint order_items_pk
+            primary key,
+    order_id            bigint                   not null
+        constraint order_items_orders_id_fk
+            references orders,
+    rental_type_id      bigint,
+    rental_quantity     integer,
+    vehicle_type_id     bigint,
+    vehicle_quantity    integer,
+    disposable_type_id  integer,
+    disposable_quantity integer,
+    starting_at         timestamp with time zone not null,
+    ending_at           timestamp with time zone not null,
+    user_session        bigint                   not null
+        constraint order_items_session_id_fk
+            references user_sessions
+);
+
+alter table order_items
+    owner to michalukropec;
+
+create table order_clients
+(
+    id         bigserial
+        constraint order_clients_pk
+            primary key,
+    order_id   bigint                                 not null
+        constraint order_clients_order_id_fk
+            references orders,
+    client_id  bigint                                 not null
+        constraint order_clients_client_id_fk
+            references clients,
+    created_at timestamp with time zone default now() not null
+);
+
+alter table order_clients
+    owner to michalukropec;
+
+create table loads
+(
+    id            bigserial
+        constraint loads_pk
+            primary key,
+    rental_id     bigint,
+    vehicle_id    bigint,
+    disposable_id bigint,
+    loaded_at     timestamp with time zone default now() not null,
+    user_session  bigint                                 not null
+        constraint loads_session_id_fk
+            references user_sessions
+);
+
+alter table loads
+    owner to michalukropec;
+
+create table unloads
+(
+    id                   bigserial
+        constraint unloads_pk
+            primary key,
+    rental_id            bigint,
+    rental_state         text,
+    vehicle_id           bigint,
+    vehicle_state        text,
+    disposable_id        bigint,
+    disposable_remaining numeric(5, 2)            default 0.00  not null,
+    unloaded_at          timestamp with time zone default now() not null,
+    user_session         bigint                                 not null
+        constraint unloads_session_id_fk
+            references user_sessions
+);
+
+alter table unloads
+    owner to michalukropec;
+
+create table notifications
+(
+    id          bigint default nextval('notification_id_seq'::regclass) not null
+        constraint notifications_pk
+            primary key,
+    importance  notification_type                                       not null,
+    name        varchar(100)                                            not null,
+    description text
+);
+
+alter table notifications
+    owner to michalukropec;
+
+alter sequence notification_id_seq owned by notifications.id;
+
+create table user_notification
+(
+    id              bigserial
+        constraint user_notification_pk
+            primary key,
+    user_id         bigint                   not null
+        constraint user_notification_user_id_fk
+            references users,
+    notification_id bigint                   not null
+        constraint user_notification_notification_id_fk
+            references notifications,
+    read_at         timestamp with time zone not null
+);
+
+alter table user_notification
+    owner to michalukropec;
+
+create table change_log
+(
+    id             bigserial
+        constraint change_log_pk
+            primary key,
+    affected_table varchar(50)                            not null,
+    affected_id    bigint                                 not null,
+    query          text                                   not null,
+    caused_by      bigint
+        constraint change_log_user_id_fk
+            references users,
+    caused_at      timestamp with time zone default now() not null
+);
+
+alter table change_log
     owner to michalukropec;
 ```
