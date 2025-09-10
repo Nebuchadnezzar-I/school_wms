@@ -1,6 +1,5 @@
-## Sep 8 - 2025
+## What to do next 
 
-- [ ] changle_log
-- [ ] bind user_sessions to needed tables
-- [ ] Setup notifications (u need user_notifiaction table and enum)
-- [ ] Google Auth
+- [ ] Add basic basic APIs
+- [ ] Bind to DB
+- [ ] Start writing HTMX
