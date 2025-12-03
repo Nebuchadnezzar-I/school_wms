@@ -1,0 +1,53 @@
+{{define "title"}}Login{{end}}
+
+{{define "main"}}
+<form action="/user/login" method="POST" autocomplete="on" novalidate>
+    <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+
+    {{range .Form.NonFieldErrors}}
+        <div class="error">{{.}}</div>
+    {{end}}
+
+    <div class="form-header">
+        <h1>Log in</h1>
+        <p>Dont have an account? <a href="/user/signup">Request one</a></p>
+    </div>
+
+    <div class="form-field">
+        <label for="email">Email</label>
+        {{with .Form.FieldErrors.email}}
+            <label class="error">{{.}}</label>
+        {{end}}
+        <input 
+            placeholder="Email"
+            id="email"
+            type="email" 
+            name="email"
+            value="{{.Form.Email}}"
+            autocomplete="email"
+            required
+        >
+    </div>
+
+    <div class="form-field">
+        <label for="password">Password</label>
+        {{with .Form.FieldErrors.password}}
+            <label class="error">{{.}}</label>
+        {{end}}
+        <input 
+            placeholder="Password"
+            id="password"
+            type="password" 
+            name="password"
+            autocomplete="current-password"
+            required
+        >
+    </div>
+
+    <div class="submit-box">
+        <div class="spacer"></div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+{{end}}
+

@@ -1,0 +1,227 @@
+:root {
+    --color-bg-1: hsl(0, 0%, 9%);
+    --color-bg-2: hsl(0, 0%, 15%);
+    --color-bg-3: hsl(0, 0%, 22%);
+    --color-bg-4: hsl(0, 0%, 32%);
+
+    --color-text-1: hsl(0, 0%, 100%);
+    --color-text-2: hsl(0, 0%, 66%);
+
+    --color-accent-1: hsl(219, 100%, 50%);
+    --color-accent-1-muted: hsl(219, 100%, 35%);
+    --color-accent-2: hsl(357, 86%, 86%);
+
+    --header-bg: var(--color-bg-1);
+    --header-hover-bg: var(--color-bg-2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background: var(--color-bg-2);
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+a {
+    color: var(--color-accent-1);
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.error {
+    color: var(--color-accent-2);
+}
+
+/* Header */
+header {
+    height: 4rem;
+    background: var(--header-bg);
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+
+    .spacer {
+        width: 100%;
+    }
+
+    .logout-button {
+        height: 100%;
+        width: fit-content;
+        background: transparent;
+
+        button {
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+
+            height: 100%;
+            font-size: 1rem;
+            padding: 0 1rem;
+            color: var(--color-text-1);
+            font-weight: 400;
+            text-decoration: none;
+
+            &:hover {
+                background: var(--header-hover-bg);
+            }
+        }
+    }
+
+    a:first-of-type {
+        font-size: 1.25rem;
+        color: var(--color-text-1);
+        font-weight: 500;
+        text-decoration: none;
+        font-family: "Montserrat";
+        white-space: nowrap;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+header > a:not(:first-of-type) {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+    font-size: 1rem;
+    padding: 0 1rem;
+    color: var(--color-text-1);
+    font-weight: 400;
+    text-decoration: none;
+
+    &:hover {
+        background: var(--header-hover-bg);
+    }
+}
+
+/* Main */
+main {
+    width: 100%;
+    height: calc(100% - 4rem);
+    padding: 1.25rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .todo {
+        font-weight: 400;
+        font-size: 1.25rem;
+        color: var(--color-text-1);
+    }
+}
+
+/* Form */
+form {
+    width: 100%;
+    max-width: 50rem;
+    background: var(--color-bg-3);
+    color: var(--color-text-1);
+
+    .form-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        font-size: 0.8rem;
+
+        h1 {
+            font-size: 1.25rem;
+        }
+    }
+
+    .submit-box {
+        display: flex;
+        border-top: 1px solid var(--color-bg-4);
+
+        .spacer {
+            width: 100%;
+        }
+
+        button {
+            display: flex;
+            align-items: left;
+            padding: 1rem;
+
+            width: 100%;
+            height: 4rem;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--color-text-1);
+            background: var(--color-accent-1-muted);
+
+            &:hover {
+                background: var(--color-accent-1);
+            }
+        }
+    }
+
+    .form-field {
+        border-top: 1px solid var(--color-bg-4);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+
+        label {
+            font-size: 0.8rem;
+        }
+
+        input {
+            font-size: 1rem;
+            color: var(--color-text-1);
+            background: transparent;
+            box-sizing: border-box;
+            padding: 0;
+            border: none;
+            outline: none;
+            padding: 1rem 0;
+        }
+    }
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    left: 1.5rem;
+    bottom: 1.5rem;
+    color: var(--color-text-2);
+    font-size: 1rem;
+}
+
+/* Media */
+@media only screen and (max-width: 600px) {
+    header {
+        height: 3rem;
+        padding: 0 1rem;
+
+        a:first-of-type {
+            font-size: 1rem;
+        }
+
+        a:not(:first-of-type) {
+            font-size: 0.8rem;
+        }
+    }
+    
+    footer {
+        font-size: 0.8rem;
+    }
+}
